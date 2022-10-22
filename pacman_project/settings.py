@@ -8,9 +8,9 @@ class Settings():
         # self.screen_height = 800
         # self.bg_color = (0, 0, 0)
         # self.bg_color = (150, 150, 150)
-        self.tilewidth = 16
-        self.tileheight = 16
-        self.nrows = 36
+        self.tilewidth = 32
+        self.tileheight = 32
+        self.nrows = 20
         self.ncols = 28
         self.screen_width = self.ncols*self.tilewidth
         self.screen_height = self.nrows*self.tileheight
@@ -21,7 +21,7 @@ class Settings():
         self.posn = 0
 
     def initialize_speed_settings(self):
-        self.pacman_speed_factor = 0.05
+        self.pacman_speed_factor = 0.15
         self.ghost_speed_factor = 1
 
 
