@@ -1,4 +1,5 @@
 import pygame as pg
+from block import Block
 
 # list of nodes
 # maze = [
@@ -48,10 +49,12 @@ class Maze:
         with open(self.filename, 'r') as f:
             self.rows = f.readlines()
 
-        self.bricks = []
+        #self.bricks = []
+        self.bricks = pg.sprite.Group()
+
         # self.brick = pg.image.load('images/Block.png')
         # self.brick = pg.transform.scale(self.brick, (16, 16))
-        self.brick = pg.transform.scale(pg.image.load('images/Block.png'), (32, 32))
+        self.brick = pg.transform.scale(pg.image.load('images/Block.png'), (16, 16))
         self.rect = self.brick.get_rect()
 
         self.build()
@@ -60,20 +63,23 @@ class Maze:
         b = self.rect
         bw, bh = b.width, b.height
 
-        print(self.rows)
+        # print(self.rows)
         rowNum = 0
 
         for nrow in range(len(self.rows)):
             row = self.rows[nrow]
-            print(row)
+            # print(row)
             for ncol in range(len(row)):
                 col = row[ncol]
-                print(col)
+                # print(col)
                 if col == 'X':
-                    self.bricks.append(pg.Rect(ncol*16, rowNum*16, bw, bh))
-                    print("Y")
+                    #self.bricks.append(pg.Rect(ncol*8, rowNum*8, bw, bh))
+                    self.bricks.add(Block(ncol*8, rowNum*8, bw, bh, self.brick))
+
+                    # print("Y")
+                    # print(self.bricks)
             rowNum += 2
-        print(self.bricks)
+        # print(self.bricks)
 
     def wall_collide(self): pass
 

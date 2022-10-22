@@ -14,6 +14,7 @@ class Pacman(Sprite):
         self.game = game
         self.screen = game.screen
         self.settings = game.settings
+        self.maze = game.maze
 
         self.image = pg.image.load('images/PacmanRight-0.png')
         self.rect = self.image.get_rect()
@@ -29,18 +30,28 @@ class Pacman(Sprite):
         self.pacmanMovingUp = False
         self.pacmanMovingDown = False
 
-        self.pacman_right = [pg.transform.rotozoom(pg.image.load(f'images/PacmanRight-{n}.png'), 0, 1) for n in range(3)]
-        self.pacman_left = [pg.transform.rotozoom(pg.image.load(f'images/PacmanLeft-{n}.png'), 0, 1) for n in range(3)]
-        self.pacman_up = [pg.transform.rotozoom(pg.image.load(f'images/PacmanUp-{n}.png'), 0, 1) for n in range(3)]
-        self.pacman_down = [pg.transform.rotozoom(pg.image.load(f'images/PacmanDown-{n}.png'), 0, 1) for n in range(3)]
+        self.pacman_right = [pg.transform.rotozoom(pg.image.load(f'images/PacmanRight-{n}.png'), 0, 0.5) for n in range(3)]
+        self.pacman_left = [pg.transform.rotozoom(pg.image.load(f'images/PacmanLeft-{n}.png'), 0, 0.5) for n in range(3)]
+        self.pacman_up = [pg.transform.rotozoom(pg.image.load(f'images/PacmanUp-{n}.png'), 0, 0.5) for n in range(3)]
+        self.pacman_down = [pg.transform.rotozoom(pg.image.load(f'images/PacmanDown-{n}.png'), 0, 0.5) for n in range(3)]
 
         self.timer_normal = Timer(self.pacman_right)
         self.timer = self.timer_normal
 
+        self.wallCollide = False
+
     def spawn(self):
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.centery = self.screen_rect.centery
-        return Vector(self.rect.left, self.rect.top)
+        # self.rect.centerx = self.screen_rect.centerx
+        # self.rect.centery = self.screen_rect.centery
+        # return Vector(self.rect.left, self.rect.top)
+        return Vector(30, 48)
+
+    def checkWallCollision(self):
+        if pg.sprite.spritecollideany(self, self.maze.bricks):
+            print("Wall")
+            self.wallCollide = True
+            #return True
+        #return pg.sprite.spritecollideany(self, self.maze.bricks)
 
     def update(self):
         if self.pacmanMovingLeft:
