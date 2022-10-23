@@ -26,20 +26,6 @@ def check_keydown_events(event, settings, pacman):
             pacman.vel = settings.pacman_speed_factor * movement[key]
         pacman.vel = settings.pacman_speed_factor * movement[key]
 
-        # if key == pg.K_LEFT:
-        #     pacman.pacmanMovingLeft = True
-        #     pacman.vel = settings.pacman_speed_factor * movement[key]
-        # if key == pg.K_RIGHT:
-        #     pacman.pacmanMovingRight = True
-        #     pacman.vel = settings.pacman_speed_factor * movement[key]
-        # if key == pg.K_UP:
-        #     pacman.pacmanMovingUp = True
-        #     pacman.vel = settings.pacman_speed_factor * movement[key]
-        # if key == pg.K_DOWN:
-        #     pacman.pacmanMovingDown = True
-        #     pacman.vel = settings.pacman_speed_factor * movement[key]
-        # pacman.vel = settings.pacman_speed_factor * movement[key]
-
 
         # if key == pg.K_LEFT:
         #     if pacman.checkWallCollision():

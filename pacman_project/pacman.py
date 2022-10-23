@@ -46,10 +46,56 @@ class Pacman(Sprite):
         # return Vector(self.rect.left, self.rect.top)
         return Vector(30, 48)
 
-    def checkWallCollision(self):
-        if pg.sprite.spritecollideany(self, self.maze.bricks):
-            print("Wall")
-            self.wallCollide = True
+    def checkWallCollision(self): pass
+        # for x in self.maze.bricks:
+        #     if self.rect.colliderect(x):
+        #         print("Hi")
+
+
+
+
+        # collide = pg.sprite.spritecollide(self, self.maze.bricks, False)
+        # if collide:
+        #     print("True")
+        #     self.vel = Vector()
+
+        # for p in pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #     if self.rect.right == p.rect.left:
+        #         print("Hi")
+            # if self.rect.right == p.rect.left:
+            #     print("P.Right = B.Left")
+            # if self.rect.left == p.rect.right:
+            #     print("P.Left = B.Right")
+            # if self.rect.top == p.rect.bottom:
+            #     print("P.Top = B.Bottom")
+            # if self.rect.bottom == p.rect.top:
+            #     print("P.Bottom = B.Top")
+
+        # if pg.sprite.collide_rect(self, self.maze.rect):
+        #     if self.pacmanMovingLeft:
+        #         print('Left')
+
+        # if pg.sprite.collide_rect(self, self.maze.rect):
+        #     print("Hi")
+        # for p in pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #     if self.rect.right == p.rect.left:
+        #         print("P.Right = B.Left")
+        #     if self.rect.left == p.rect.right:
+        #         print("P.Left = B.Right")
+        #     if self.rect.top == p.rect.bottom:
+        #         print("P.Top = B.Bottom")
+        #     if self.rect.bottom == p.rect.top:
+        #         print("P.Bottom = B.Top")
+
+
+
+
+
+
+
+        # if pg.sprite.spritecollideany(self, self.maze.bricks):
+        #     print("Wall")
+        #     self.wallCollide = True
             #return True
         #return pg.sprite.spritecollideany(self, self.maze.bricks)
 
