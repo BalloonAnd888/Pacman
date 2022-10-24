@@ -30,15 +30,21 @@ class Pacman(Sprite):
         self.pacmanMovingUp = False
         self.pacmanMovingDown = False
 
-        self.pacman_right = [pg.transform.rotozoom(pg.image.load(f'images/PacmanRight-{n}.png'), 0, 0.5) for n in range(3)]
-        self.pacman_left = [pg.transform.rotozoom(pg.image.load(f'images/PacmanLeft-{n}.png'), 0, 0.5) for n in range(3)]
-        self.pacman_up = [pg.transform.rotozoom(pg.image.load(f'images/PacmanUp-{n}.png'), 0, 0.5) for n in range(3)]
-        self.pacman_down = [pg.transform.rotozoom(pg.image.load(f'images/PacmanDown-{n}.png'), 0, 0.5) for n in range(3)]
+        self.pacmanMovedLeft = False
+        self.pacmanMovedRight = False
+        self.pacmanMovedUp = False
+        self.pacmanMovedDown = False
+
+        self.pacman_right = [pg.transform.rotozoom(pg.image.load(f'images/PacmanRight-{n}.png'), 0, 1) for n in range(3)]
+        self.pacman_left = [pg.transform.rotozoom(pg.image.load(f'images/PacmanLeft-{n}.png'), 0, 1) for n in range(3)]
+        self.pacman_up = [pg.transform.rotozoom(pg.image.load(f'images/PacmanUp-{n}.png'), 0, 1) for n in range(3)]
+        self.pacman_down = [pg.transform.rotozoom(pg.image.load(f'images/PacmanDown-{n}.png'), 0, 1) for n in range(3)]
 
         self.timer_normal = Timer(self.pacman_right)
         self.timer = self.timer_normal
 
         self.wallCollide = False
+        self.moving = False
 
     def spawn(self):
         # self.rect.centerx = self.screen_rect.centerx
@@ -46,70 +52,94 @@ class Pacman(Sprite):
         # return Vector(self.rect.left, self.rect.top)
         return Vector(30, 48)
 
-    def checkWallCollision(self): pass
-        # for x in self.maze.bricks:
-        #     if self.rect.colliderect(x):
-        #         print("Hi")
+    def collisionX(self): pass
+
+    def collisionY(self): pass
+
+    def checkWallCollision(self):
+        if self.pacmanMovingLeft or self.pacmanMovedLeft:
+            print("PML")
+            collide = pg.sprite.spritecollide(self, self.maze.bricks, False)
+            if collide:
+                self.rect.x = collide[0].rect.right
+                self.vel = Vector()
+
+        if self.pacmanMovingRight or self.pacmanMovedRight:
+            print("PMR")
+            collide = pg.sprite.spritecollide(self, self.maze.bricks, False)
+            if collide:
+                self.rect.x = collide[0].rect.left - self.rect.width
+                self.vel = Vector()
 
 
 
+        # collide = pg.Rect.colliderect(self.rect, self.maze.rect)
 
-        # collide = pg.sprite.spritecollide(self, self.maze.bricks, False)
-        # if collide:
-        #     print("True")
-        #     self.vel = Vector()
+        #print(collide)
+        # self.wallCollide = False
+        # if pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #     print("Collide")
+        #     if self.pacmanMovedUp is True:
+        #         self.pacmanMovedUp = False
+        #         self.vel = Vector()
+        #         self.wallCollide = True
+        #         print("UP")
+        #     if self.pacmanMovedDown is True:
+        #         self.pacmanMovedDown = False
+        #         self.vel = Vector()
+        #         print("Down")
+        #         self.wallCollide = True
+        #     if self.pacmanMovedLeft is True:
+        #         self.pacmanMovedLeft = False
+        #         self.vel = Vector()
+        #         print("Left")
+        #         self.wallCollide = True
+        #     if self.pacmanMovedRight is True:
+        #         self.pacmanMovedRight = False
+        #         self.vel = Vector()
+        #         print("Right")
+        #         self.wallCollide = True
 
-        # for p in pg.sprite.spritecollide(self, self.maze.bricks, False):
-        #     if self.rect.right == p.rect.left:
-        #         print("Hi")
-            # if self.rect.right == p.rect.left:
-            #     print("P.Right = B.Left")
-            # if self.rect.left == p.rect.right:
-            #     print("P.Left = B.Right")
-            # if self.rect.top == p.rect.bottom:
-            #     print("P.Top = B.Bottom")
-            # if self.rect.bottom == p.rect.top:
-            #     print("P.Bottom = B.Top")
+        # self.wallCollide = False
+        # if self.pacmanMovedUp is True:
+        #     if pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #         self.pacmanMovedUp = False
+        #         self.vel = Vector()
+        #         self.wallCollide = True
+        # elif self.pacmanMovedDown is True:
+        #     if pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #         self.pacmanMovedDown = False
+        #         self.vel = Vector()
+        #         self.wallCollide = True
 
-        # if pg.sprite.collide_rect(self, self.maze.rect):
-        #     if self.pacmanMovingLeft:
-        #         print('Left')
-
-        # if pg.sprite.collide_rect(self, self.maze.rect):
-        #     print("Hi")
-        # for p in pg.sprite.spritecollide(self, self.maze.bricks, False):
-        #     if self.rect.right == p.rect.left:
-        #         print("P.Right = B.Left")
-        #     if self.rect.left == p.rect.right:
-        #         print("P.Left = B.Right")
-        #     if self.rect.top == p.rect.bottom:
-        #         print("P.Top = B.Bottom")
-        #     if self.rect.bottom == p.rect.top:
-        #         print("P.Bottom = B.Top")
-
-
-
-
-
-
-
-        # if pg.sprite.spritecollideany(self, self.maze.bricks):
-        #     print("Wall")
-        #     self.wallCollide = True
-            #return True
-        #return pg.sprite.spritecollideany(self, self.maze.bricks)
+        # elif self.pacmanMovedLeft is True:
+        #     if pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #         self.pacmanMovedLeft = False
+        #         self.vel = Vector()
+        #         self.wallCollide = True
+        # if self.pacmanMovedRight is True:
+        #     if pg.sprite.spritecollide(self, self.maze.bricks, False):
+        #         self.pacmanMovedRight = False
+        #         self.vel = Vector()
+        #         self.wallCollide = True
 
     def update(self):
         if self.pacmanMovingLeft:
+            # self.wallCollide = False
             self.timer_normal = Timer(frames=self.pacman_left)
             self.timer = self.timer_normal
+            #self.vel = self.settings.pacman_speed_factor * Vector(-1,0)
         if self.pacmanMovingRight:
+            # self.wallCollide = False
             self.timer_normal = Timer(frames=self.pacman_right)
             self.timer = self.timer_normal
+            # self.vel = self.settings.pacman_speed_factor * Vector(1, 0)
         if self.pacmanMovingUp:
+            # self.wallCollide = False
             self.timer_normal = Timer(frames=self.pacman_up)
             self.timer = self.timer_normal
         if self.pacmanMovingDown:
+            # self.wallCollide = False
             self.timer_normal = Timer(frames=self.pacman_down)
             self.timer = self.timer_normal
         self.position += self.vel

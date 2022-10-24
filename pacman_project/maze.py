@@ -49,8 +49,8 @@ class Maze:
         with open(self.filename, 'r') as f:
             self.rows = f.readlines()
 
-        self.bricks = []
-        # self.bricks = pg.sprite.Group()
+        #self.bricks = []
+        self.bricks = pg.sprite.Group()
 
         # self.brick = pg.image.load('images/Block.png')
         # self.brick = pg.transform.scale(self.brick, (16, 16))
@@ -73,13 +73,15 @@ class Maze:
                 col = row[ncol]
                 # print(col)
                 if col == 'X':
-                    self.bricks.append(pg.Rect(ncol*8, rowNum*8, bw, bh))
+                    #self.bricks.append(pg.Rect(ncol*8, rowNum*8, bw, bh))
                     # self.bricks.append(Block(ncol*8, rowNum*8, bw, bh, self.brick))
-                    #self.bricks.add(Block(ncol*8, rowNum*8, bw, bh, self.brick))
+                    self.bricks.add(Block(ncol*8, rowNum*8, bw, bh, self.brick))
 
                     # print("Y")
             rowNum += 2
         # print(self.bricks)
+        # for x in self.bricks:
+        #     print(x)
 
     def wall_collide(self): pass
 

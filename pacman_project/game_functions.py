@@ -2,6 +2,11 @@ import sys
 import pygame as pg
 from vector import Vector
 
+
+# class GameFunction:
+#     def __init__(self):
+#         pass
+
 movement = {pg.K_LEFT: Vector(-1, 0),   # dictionary to map keys to Vector velocities
             pg.K_RIGHT: Vector(1, 0),
             pg.K_UP: Vector(0, -1),
@@ -13,62 +18,94 @@ def check_keydown_events(event, settings, pacman):
     key = event.key
     if key in movement.keys():
         if key == pg.K_LEFT:
+            pacman.wallCollide = False
+            pacman.moving = True
             pacman.pacmanMovingLeft = True
-            pacman.vel = settings.pacman_speed_factor * movement[key]
+            pacman.pacmanMovingRight = False
+            pacman.pacmanMovingUp = False
+            pacman.pacmanMovingDown = False
+            if not pacman.wallCollide:
+                pacman.vel = settings.pacman_speed_factor * movement[key]
+
         if key == pg.K_RIGHT:
+            pacman.wallCollide = False
+            pacman.moving = True
+            pacman.pacmanMovingLeft = False
             pacman.pacmanMovingRight = True
-            pacman.vel = settings.pacman_speed_factor * movement[key]
+            pacman.pacmanMovingUp = False
+            pacman.pacmanMovingDown = False
+            if not pacman.wallCollide:
+                pacman.vel = settings.pacman_speed_factor * movement[key]
+
         if key == pg.K_UP:
+            pacman.wallCollide = False
+            pacman.pacmanMovingLeft = False
+            pacman.moving = True
+            pacman.pacmanMovingRight = False
             pacman.pacmanMovingUp = True
-            pacman.vel = settings.pacman_speed_factor * movement[key]
+            pacman.pacmanMovingDown = False
+            if not pacman.wallCollide:
+                pacman.vel = settings.pacman_speed_factor * movement[key]
+
         if key == pg.K_DOWN:
+            pacman.wallCollide = False
+            pacman.pacmanMovingLeft = False
+            pacman.moving = True
+            pacman.pacmanMovingRight = False
+            pacman.pacmanMovingUp = False
             pacman.pacmanMovingDown = True
-            pacman.vel = settings.pacman_speed_factor * movement[key]
-        pacman.vel = settings.pacman_speed_factor * movement[key]
-
-
-        # if key == pg.K_LEFT:
-        #     if pacman.checkWallCollision():
-        #         pacman.pacmanMovingLeft = False
-        #         pacman.vel = Vector()
-        #     else:
-        #         pacman.pacmanMovingLeft = True
-        #         pacman.vel = settings.pacman_speed_factor * movement[key]
-        # if key == pg.K_RIGHT:
-        #     if pacman.checkWallCollision():
-        #         pacman.pacmanMovingRight = False
-        #     else:
-        #         pacman.pacmanMovingRight = True
-        #         pacman.vel = settings.pacman_speed_factor * movement[key]
-        # if key == pg.K_UP:
-        #     if pacman.checkWallCollision():
-        #         pacman.pacmanMovingUp = False
-        #     else:
-        #         pacman.pacmanMovingUp = True
-        #         pacman.vel = settings.pacman_speed_factor * movement[key]
-        # if key == pg.K_DOWN:
-        #     if pacman.checkWallCollision():
-        #         pacman.pacmanMovingDown = False
-        #     else:
-        #         pacman.pacmanMovingDown = True
-        #         pacman.vel = settings.pacman_speed_factor * movement[key]
-
-        #pacman.vel = settings.pacman_speed_factor * movement[key]
-        # print(f'ship now moving at {ship.vel}')
-
+            if not pacman.wallCollide:
+                pacman.vel = settings.pacman_speed_factor * movement[key]
 
 def check_keyup_events(event, pacman):
     key = event.key
     if key == pg.K_ESCAPE:
         pacman.vel = Vector()   # Note: Escape key stops the ship
+    # if key == pg.K_LEFT:
+    #     if pacman.checkWallCollision():
+    #         pacman.pacmanMovingLeft = False
+    #         pacman.vel = Vector()
+    #         print("CLF")
+    #     else:
+    #         pacman.pacmanMovingLeft = False
+    #         print("LF")
+    # if key == pg.K_RIGHT:
+    #     pacman.pacmanMovingRight = False
+    # if key == pg.K_UP:
+    #     pacman.pacmanMovingUp = False
+    # if key == pg.K_DOWN:
+    #     pacman.pacmanMovingDown = False
+
     if key == pg.K_LEFT:
         pacman.pacmanMovingLeft = False
+        pacman.pacmanMovedLeft = True
+        pacman.pacmanMovedRight = False
+        pacman.pacmanMovedUp = False
+        pacman.pacmanMovedDown = False
+        # pacman.vel = Vector()
+        #print("KUL")
     if key == pg.K_RIGHT:
         pacman.pacmanMovingRight = False
+        pacman.pacmanMovedRight = True
+        pacman.pacmanMovedLeft = False
+        pacman.pacmanMovedUp = False
+        pacman.pacmanMovedDown = False
+        # pacman.vel = Vector()
     if key == pg.K_UP:
         pacman.pacmanMovingUp = False
+        pacman.pacmanMovedUp = True
+        pacman.pacmanMovedLeft = False
+        pacman.pacmanMovedRight = False
+        pacman.pacmanMovedDown = False
+        #pacman.vel = Vector()
     if key == pg.K_DOWN:
         pacman.pacmanMovingDown = False
+        pacman.pacmanMovedDown = True
+        pacman.pacmanMovedLeft = False
+        pacman.pacmanMovedRight = False
+        pacman.pacmanMovedUp = False
+        #pacman.vel = Vector()
+
 
 def check_events(settings, pacman):
     for event in pg.event.get():
