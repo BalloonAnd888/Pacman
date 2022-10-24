@@ -10,8 +10,8 @@ class Settings():
         # self.bg_color = (150, 150, 150)
         self.tilewidth = 16
         self.tileheight = 16
-        self.nrows = 36
-        self.ncols = 28
+        self.nrows = 20  # 30
+        self.ncols = 20  # 40
         self.screen_width = self.ncols*self.tilewidth
         self.screen_height = self.nrows*self.tileheight
         # self.screensize = (self.screen_width, self.screen_height)

@@ -15,7 +15,7 @@ class Game:
         self.screen = pg.display.set_mode(size=size)
         pg.display.set_caption("Pacman")
 
-        # self.maze = Maze()
+        self.maze = Maze(self.screen, self.settings, mazefile='images/mazetest.txt')
         self.pacman = Pacman(game=self)
 
         self.settings.initialize_speed_settings()
@@ -24,7 +24,9 @@ class Game:
         while True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
             gf.check_events(settings=self.settings, pacman=self.pacman)
             self.screen.fill(self.settings.black)
+            self.pacman.checkWallCollision()
             self.pacman.update()
+            self.maze.update()
             pg.display.update()
 
 
